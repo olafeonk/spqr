@@ -106,4 +106,5 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20240318140521-94a12d6c2237 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gotest.tools/v3 v3.5.1 // indirect
+	layeh.com/radius v0.0.0-20231213012653-1006025d24f8 // indirect
 )

@@ -403,6 +403,25 @@ func AuthFrontend(cl client.Client, rule *config.FrontendRule) error {
 			return fmt.Errorf("GSS realm in token missmatch with realm in confing: '%v' != '%v'", rule.AuthRule.GssConfig.KrbRealm, cred.Realm())
 		}
 		return nil
+	case config.AuthRadius:
+		if rule.AuthRule.RADIUSConfig == nil {
+			return fmt.Errorf("RADIUS configuration are not set for RADIUS auth method")
+		}
+		if cl.Usr() != rule.Usr {
+			return fmt.Errorf("user from client %v != %v missmatch user in config", cl.Usr(), rule.Usr)
+		}
+		password, err := cl.PasswordCT()
+		if err != nil {
+			return err
+		}
+
+		err = rule.AuthRule.RADIUSConfig.IsAuthUser(cl.Usr(), password)
+		if err != nil {
+			return err
+		}
+
+		return nil
+
 	default:
 		return fmt.Errorf("invalid auth method '%v'", rule.AuthRule.Method)
 	}

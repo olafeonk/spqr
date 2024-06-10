@@ -169,6 +169,17 @@ services:
       timeout: 3s
       retries: 50
 
+  radiusserver1:
+    build:
+      dockerfile: ./docker/freeradius/Dockerfile
+      context: ../../
+    hostname: regress_radius_server_1
+    container_name: regress_radius_server_1
+    ports:
+      - "1812-1813:1812-1813/udp"
+    healthcheck:
+      test: radtest regress 12345678 regress_radius_server_1 0 secret
+
   kdc:
     build:
       context: ./conf/kdc

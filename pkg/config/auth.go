@@ -14,11 +14,13 @@ const (
 	AuthSCRAM     = AuthMethod("scram")
 	AuthLDAP      = AuthMethod("ldap")
 	AuthGSS       = AuthMethod("gss")
+	AuthRadius    = AuthMethod("radius")
 )
 
 type AuthCfg struct {
-	Method     AuthMethod `json:"auth_method" yaml:"auth_method" toml:"auth_method"`
-	Password   string     `json:"password" yaml:"password" toml:"password"`
-	LDAPConfig *LDAPCfg   `json:"ldap_config" yaml:"ldap_config" toml:"ldap_config"`
-	GssConfig  *GssCfg    `json:"gss_config" yaml:"gss_config" toml:"gss_config"`
+	Method       AuthMethod `json:"auth_method" yaml:"auth_method" toml:"auth_method"`
+	Password     string     `json:"password" yaml:"password" toml:"password"`
+	LDAPConfig   *LDAPCfg   `json:"ldap_config" yaml:"ldap_config" toml:"ldap_config"`
+	GssConfig    *GssCfg    `json:"gss_config" yaml:"gss_config" toml:"gss_config"`
+	RADIUSConfig *RADIUSCfg `json:"radius_config" yaml:"radius_config" toml:"radius_config"`
 }
